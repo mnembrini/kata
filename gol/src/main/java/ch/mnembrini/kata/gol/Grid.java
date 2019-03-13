@@ -51,4 +51,11 @@ public class Grid {
         sb.append('}');
         return sb.toString();
     }
+
+    public boolean cellAt(int row, int column) {
+        return data[row][column];
+    }
+
+    public int countNeighbours(boolean b) {
+    }
 }
