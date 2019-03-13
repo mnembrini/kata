@@ -11,6 +11,13 @@ public class GenerationService {
      */
     public void next(Grid grid) {
 
+        for (int row = 0; row < grid.getRowSize(); row++) {
+            for (int column = 0; column < grid.getColumnSize(); column++) {
+                grid.get
+            }
+        }
+
+
     }
 }
 
