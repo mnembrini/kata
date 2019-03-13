@@ -14,7 +14,7 @@ public class GenerationService {
         for (int row = 0; row < grid.getRowSize(); row++) {
             for (int column = 0; column < grid.getColumnSize(); column++) {
                 boolean alive = grid.getCell(row, column);
-                int aliveNeighbours = grid.countNeighbours(true, row, column);
+                int aliveNeighbours = grid.countAliveNeighbours(row, column);
                 boolean nextState = computeNextState(alive, aliveNeighbours);
                 grid.setCell(row, column, nextState);
             }

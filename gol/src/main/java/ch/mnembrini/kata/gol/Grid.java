@@ -8,40 +8,45 @@ public class Grid {
     private final int rowSize;
     private final int columnSize;
 
+    /**
+     * Has extra cells around to simplify counting neighbours.
+     * true means the cell is alive
+     */
     private boolean[][] data;
 
     public Grid(int rowSize, int columnSize) {
         this.rowSize = rowSize;
         this.columnSize = columnSize;
-        data = new boolean[rowSize][columnSize];
+        data = new boolean[rowSize + 2][columnSize + 2];
     }
 
     public boolean getCell(int row, int column) {
         return data[row][column];
     }
 
-    public int countNeighbours(boolean state, int row, int column) {
+    public int countAliveNeighbours(int row, int column) {
         int total = 0;
 
-        // left neighbours
-        if (row != 0) {
-            total += count(state, row - 1, column);
-            total += count(state, row - 1, column - 1);
-            total += count(state, row - 1, column + 1);
-        }
+        // above
+        total += countAlive(row - 1, column);
+        total += countAlive(row - 1, column - 1);
+        total += countAlive(row - 1, column + 1);
 
-        // right neighbours
-        total += count(state, row + 1, column);
-        total += count(state, row + 1, column - 1);
-        total += count(state, row + 1, column + 1);
+        // bottom
+        total += countAlive(row + 1, column);
+        total += countAlive(row + 1, column - 1);
+        total += countAlive(row + 1, column + 1);
 
-        total += count(state, row, column + 1);
-        total += count(state, row, column - 1);
+        // sides
+        total += countAlive(row, column + 1);
+        total += countAlive(row, column - 1);
+
+        return total;
 
     }
 
-    private int count(boolean state, int row, int column) {
-        if (getCell(row, column) == state) {
+    private int countAlive(int row, int column) {
+        if (getCell(row, column)) {
             return 1;
         }
         return 0;
