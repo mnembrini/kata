@@ -16,6 +16,41 @@ public class Grid {
         data = new boolean[rowSize][columnSize];
     }
 
+    public boolean getCell(int row, int column) {
+        return data[row][column];
+    }
+
+    public int countNeighbours(boolean state, int row, int column) {
+        int total = 0;
+
+        // left neighbours
+        if (row != 0) {
+            total += count(state, row - 1, column);
+            total += count(state, row - 1, column - 1);
+            total += count(state, row - 1, column + 1);
+        }
+
+        // right neighbours
+        total += count(state, row + 1, column);
+        total += count(state, row + 1, column - 1);
+        total += count(state, row + 1, column + 1);
+
+        total += count(state, row, column + 1);
+        total += count(state, row, column - 1);
+
+    }
+
+    private int count(boolean state, int row, int column) {
+        if (getCell(row, column) == state) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public void setCell(int row, int column, boolean nextState) {
+        data[row][column] = nextState;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,10 +87,5 @@ public class Grid {
         return sb.toString();
     }
 
-    public boolean cellAt(int row, int column) {
-        return data[row][column];
-    }
 
-    public int countNeighbours(boolean b) {
-    }
 }
