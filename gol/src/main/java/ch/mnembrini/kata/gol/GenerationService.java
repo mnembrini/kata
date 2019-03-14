@@ -4,6 +4,26 @@ package ch.mnembrini.kata.gol;
 public class GenerationService {
 
 
+    public String print(Grid grid) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%s %s", grid.getRowSize(), grid.getColumnSize()));
+        sb.append("\n");
+
+        for (int row = 0; row < grid.getRowSize(); row++) {
+            for (int column = 0; column < grid.getColumnSize(); column++) {
+                if (grid.getCell(row, column)) {
+                    sb.append("*");
+                } else {
+                    sb.append(".");
+                }
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
+
     /**
      * Advance the game by one generation
      *

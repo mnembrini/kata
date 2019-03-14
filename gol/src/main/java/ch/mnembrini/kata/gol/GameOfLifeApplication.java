@@ -12,12 +12,12 @@ public class GameOfLifeApplication {
 
     public static void main(String[] args) throws IOException {
 
-        if (args.length < 2) {
+        if (args.length < 1) {
             System.out.println("Usage: java -jar GameOfLifeApplication.jar <inputFile>");
             System.exit(-1);
         }
 
-        String inputFile = args[1];
+        String inputFile = args[0];
         try (Stream<String> lines = Files.lines(Paths.get(inputFile))) {
             List<String> input = lines.collect(Collectors.toList());
             String firstLine = input.get(0);
@@ -31,6 +31,13 @@ public class GameOfLifeApplication {
             int columnSize = Integer.parseInt(dimensions[1]);
 
             Grid grid = parseGrid(input.subList(2, input.size()), rowSize, columnSize);
+
+            GenerationService generationService = new GenerationService();
+            generationService.advance(grid);
+            generation++;
+
+            System.out.println(String.format("Generation %s:", generation));
+            System.out.print(generationService.print(grid));
 
 
         }
