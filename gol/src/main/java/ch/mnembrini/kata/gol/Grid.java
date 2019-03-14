@@ -21,7 +21,7 @@ public class Grid {
     }
 
     public boolean getCell(int row, int column) {
-        return data[row][column];
+        return data[row + 1][column + 1];
     }
 
     public int countAliveNeighbours(int row, int column) {
@@ -53,7 +53,7 @@ public class Grid {
     }
 
     public void setCell(int row, int column, boolean nextState) {
-        data[row][column] = nextState;
+        data[row + 1][column + 1] = nextState;
     }
 
     @Override
